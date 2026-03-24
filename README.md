@@ -147,15 +147,13 @@ constexpr PImplDetail::constructor_selector_t<Args...> PImplConstructor{};
 
 template <auto... Constructors>
 class PImpl {
-    using unique_ptr_t = PImplDetail::return_type_t<
-        std::get<0>(std::make_tuple(Constructors...))>;
+    using unique_ptr_t = PImplDetail::return_type_t<std::get<0>(std::make_tuple(Constructors...))>;
 
     static_assert(PImplDetail::is_unique_ptr<unique_ptr_t>::value,
-        "Constructors must return a std::unique_ptr");
+                  "Constructors must return a std::unique_ptr");
 
-    static_assert(
-        std::has_virtual_destructor_v<typename unique_ptr_t::element_type>,
-        "Interface must have a virtual destructor");
+    static_assert(std::has_virtual_destructor_v<typename unique_ptr_t::element_type>,
+                  "Interface must have a virtual destructor");
 
 public:
     template<typename... Args>
@@ -164,18 +162,12 @@ public:
 
     template<typename F, typename... Args>
     auto Call(F&& f, Args&&... args) {
-        return std::invoke(
-            std::forward<F>(f),
-            impl_,
-            std::forward<Args>(args)...);
+        return std::invoke(std::forward<F>(f), impl_, std::forward<Args>(args)...);
     }
 
     template<typename F, typename... Args>
     auto Call(F&& f, Args&&... args) const {
-        return std::invoke(
-            std::forward<F>(f),
-            impl_,
-            std::forward<Args>(args)...);
+        return std::invoke(std::forward<F>(f), impl_, std::forward<Args>(args)...);
     }
 
 private:
