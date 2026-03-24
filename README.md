@@ -158,14 +158,14 @@ public:
     PImpl(Args&&... args)
         : impl_(PImplDetail::selector<Constructors...>::select(std::forward<Args>(args)...)) {}
 
-    template<typename F, typename... Args>
-    auto Call(F&& f, Args&&... args) {
-        return std::invoke(std::forward<F>(f), impl_, std::forward<Args>(args)...);
+    using interface_t = typename unique_ptr_t::element_type;
+    
+    interface_t* operator->() {
+        return impl_.get();
     }
 
-    template<typename F, typename... Args>
-    auto Call(F&& f, Args&&... args) const {
-        return std::invoke(std::forward<F>(f), impl_, std::forward<Args>(args)...);
+    const interface_t* operator->() const {
+        return impl_.get();
     }
 
 private:
@@ -179,4 +179,4 @@ protected:
 
 
 
-*The complete source code is available at https://wandbox.org/permlink/eDH80wmSecjmRIZZ*
+*The complete source code is available at https://wandbox.org/permlink/roInux9m1XzwqodA*
