@@ -52,9 +52,9 @@ std::unique_ptr<ICounter> ConstructCounter(int initialCount) {
 #include "Counter.h"
 
 int main() {
-    Counter counter(5);
+    Counter counter(10);
     counter.Call(&ICounter::Inc);
-    int count = counter.Call(&ICounter::Count); // count == 6
+    int count = counter.Call(&ICounter::Count); 
     return 0;
 }
 ```
