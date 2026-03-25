@@ -75,7 +75,7 @@ std::unique_ptr<ICounter> ConstructCounter();
 std::unique_ptr<ICounter> ConstructCounter(int initialCount);
 
 class Counter : public PImpl<PImplConstructor<>(ConstructCounter),
-                       PImplConstructor<int>(ConstructCounter)> {
+                             PImplConstructor<int>(ConstructCounter)> {
     using PImpl::PImpl;
 };
 
