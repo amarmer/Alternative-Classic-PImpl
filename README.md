@@ -94,6 +94,7 @@ Counter c2(5);  // calls ConstructCounter(int)
 #include <functional>
 #include <memory>
 
+// Implementation details.
 namespace PImplDetail {
 
 template<typename T>
@@ -149,6 +150,7 @@ struct constructor_selector_t {
 template<typename... Args>
 constexpr PImplDetail::constructor_selector_t<Args...> PImplConstructor{};
 
+// Base class for PImpl pattern.
 template <auto... Constructors>
 class PImpl {
     using unique_ptr_t = PImplDetail::return_type_t<std::get<0>(std::make_tuple(Constructors...))>;
