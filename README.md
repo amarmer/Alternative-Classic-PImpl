@@ -2,8 +2,8 @@
 
 ## Introduction
 
-This article describes a template-based pattern for hiding class implementations behind a pure virtual interface,</br>
-with no forwarding wrappers. It is an alternative to the classic PImpl idiom.
+This article describes a template-based pattern for hiding class implementations behind a pure virtual interface.</br>
+It is an alternative to the classic PImpl idiom.
 
 ## Applying the Pattern
 
