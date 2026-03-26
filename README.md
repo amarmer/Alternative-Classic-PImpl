@@ -79,7 +79,7 @@ protected:
     template <typename Implementation, typename... Args>
     PImplHandle(std::in_place_type_t<Implementation>, Args&&... args) {
 
-        // with 'final' and 'shared_ptr' no need virtual destructor in 'Interface'.
+        // With 'final' and 'shared_ptr' no need virtual destructor in 'Interface'.
         struct FinalWrapper final : public Implementation {
             using Implementation::Implementation;
         };
