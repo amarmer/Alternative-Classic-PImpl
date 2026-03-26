@@ -23,7 +23,7 @@ struct ICalculator {
     virtual int Sum() const = 0;
 };
 
-class Calculator: public PImplHandle<ICalculator> {
+class Calculator: public PImpl<ICalculator> {
 public:
     explicit Calculator(int sum);
 };
@@ -43,7 +43,7 @@ public:
 };
 
 Calculator::Calculator(int sum) 
-    : PImplHandle(std::in_place_type<CalculatorImpl>, sum) 
+    : PImpl(std::in_place_type<CalculatorImpl>, sum) 
 {}
 ```
 
@@ -73,13 +73,13 @@ int main() {
 #include <utility>
 
 template <typename Interface>
-class PImplHandle {
+class PImpl {
 public:
     Interface* operator->() const { return ptr_.get(); }
 
 protected:
     template <typename Implementation, typename... Args>
-    PImplHandle(std::in_place_type_t<Implementation>, Args&&... args) {
+    PImpl(std::in_place_type_t<Implementation>, Args&&... args) {
 
         // With 'final' and 'shared_ptr', no need for a virtual destructor in 'Interface'.
         struct FinalWrapper final: public Implementation {
