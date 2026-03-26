@@ -1,9 +1,12 @@
 # The Polymorphic PImpl Idiom
 
-## Introduction
+## Why the Polymorphic PImpl Idiom?
 
-This article describes a template-based pattern for hiding class implementations behind a pure virtual interface.</br>
-It is an alternative to the classic PImpl idiom.
+The PImpl (Pointer to Implementation) idiom creates compilation firewalls, but the Classic PImpl often comes with a "Proxy Tax" -</br>
+the tedious task of manually forwarding every public method to the hidden implementation.</br>
+The Polymorphic PImpl eliminates this boilerplate; it provides a zero-maintenance compilation firewall.</br>
+This pattern simplifies maintenance, enables native mocking for unit tests, and allows for safe polymorphic destruction</br>
+without the memory overhead of a virtual destructor.
 
 ## Applying the Pattern
 
