@@ -75,7 +75,7 @@ int main() {
 
 template <typename Interface>
 class PImpl {
-    static_assert(std::has_virtual_destructor_v<Interface>, "Interface must have a virtual destructor");
+    static_assert(std::has_virtual_destructor_v<Interface>, "Interface needs a virtual destructor");
 
 public:
     Interface* operator->() const { return ptr_.get(); }
