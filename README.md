@@ -126,9 +126,7 @@ protected:
   PImpl& operator=(const PImpl& other) {
     if (this != &other) {
       pClone_ = other.pClone_;
-      pInterface_ = (other.pClone_ && other.pInterface_)
-        ? other.pClone_->Clone(other.pInterface_.get())
-        : nullptr;
+      pInterface_ = other.pClone_->Clone(other.pInterface_.get());
     }
     return *this;
   }
@@ -152,4 +150,4 @@ public:
 };
 ```
 
-*The complete source code is available at https://wandbox.org/permlink/JiIZVeP1FfQgYPs4*
+*The complete source code is available at https://wandbox.org/permlink/G7JWBVTNAkekY3VM*
