@@ -95,12 +95,11 @@ class PImpl {
    *    so the base class can duplicate it without the header knowing its definition.
    */
   struct IClone {
-    virtual ~IClone() = default;
     virtual std::unique_ptr<Interface> Clone(const Interface* p) const = 0;
   };
 
   template <typename T>
-  struct CloneT final : public IClone {
+  struct CloneT: public IClone {
     std::unique_ptr<Interface> Clone(const Interface* p) const override {
       return std::make_unique<T>(*static_cast<const T*>(p));
     }
@@ -121,11 +120,8 @@ protected:
   }
 
   // Copy/Move Operations
-  PImpl(const PImpl& other) : pClone_(other.pClone_) {
-    if (other.pClone_ && other.pInterface_) {
-      pInterface_ = other.pClone_->Clone(other.pInterface_.get());
-    }
-  }
+  PImpl(const PImpl& other)
+    : pClone_(other.pClone_), pInterface_(other.pClone_->Clone(other.pInterface_.get())) {}
 
   PImpl& operator=(const PImpl& other) {
     if (this != &other) {
