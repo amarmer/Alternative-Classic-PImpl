@@ -2,7 +2,7 @@
 
 ## Why the Polymorphic PImpl Idiom?
 
-The PImpl (Pointer to Implementation) idiom creates compilation firewalls, but the Classic PImpl often comes with a "Proxy Tax" —</br> 
+The PImpl (Pointer to Implementation) idiom creates compilation firewalls, but the Classic PImpl often comes with a "Proxy Tax" — 
 the tedious task of manually forwarding every public method to the hidden implementation.
 
 The Polymorphic PImpl eliminates this boilerplate and provides four key advantages over the Classic PImpl:
