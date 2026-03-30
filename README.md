@@ -92,7 +92,9 @@ class PImpl {
   static_assert(std::has_virtual_destructor_v<Interface>, "Interface needs a virtual destructor");
 
 public:
-  Interface* operator->() const { return pInterface_.get(); }
+  Interface* operator->() { return pInterface_.get(); }
+    
+  const Interface* operator->() const { return pInterface_.get(); }    
     
 protected:
   ~PImpl() = default;
@@ -148,4 +150,4 @@ private:
 };
 ```
 
-*The complete source code is available at https://wandbox.org/permlink/RgWQZZbfO9zwydac*
+*The complete source code is available at https://wandbox.org/permlink/iGR8FkYDy4yXmolQ*
