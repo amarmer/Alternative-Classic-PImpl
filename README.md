@@ -103,7 +103,9 @@ protected:
   template <typename Implementation, typename... Args>
   PImpl(std::in_place_type_t<Implementation>, Args&&... args)
     : pInterface_(std::make_unique<Implementation>(std::forward<Args>(args)...)), 
-      pClone_(&CloneImpl<Implementation>) {}
+      pClone_([](const Interface* p) -> std::unique_ptr<Interface> {
+         return std::make_unique<Implementation>(*static_cast<const Implementation*>(p));
+      }) {}    
 
   // Copy/Move Operations
   PImpl(const PImpl& other) {
@@ -129,11 +131,6 @@ protected:
   }
     
 private:
-  template <typename T>
-  static std::unique_ptr<Interface> CloneImpl(const Interface* p) {
-    return std::make_unique<T>(*static_cast<const T*>(p));
-  }    
-    
   void CopyFrom(const PImpl& other) {
     pClone_ = other.pClone_;
     pInterface_ = other.pClone_(other.pInterface_.get());
@@ -150,4 +147,4 @@ private:
 };
 ```
 
-*The complete source code is available at https://wandbox.org/permlink/iGR8FkYDy4yXmolQ*
+*The complete source code is available at https://wandbox.org/permlink/hVYDAdefx8fWkhB8*
